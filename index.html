@@ -2,578 +2,328 @@
 <html lang="ru">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1.0"
+  >
   <meta name="theme-color" content="#090807">
-  <title>Phoenix — ножи, скованные огнём</title>
+
+  <title>Феникс — ножи, скованные огнём</title>
 
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
   <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Manrope:wght@400;500;600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500;1,600&family=Manrope:wght@400;500;600;700&display=swap"
     rel="stylesheet"
   >
 
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="pages.css">
 </head>
 
 <body>
-  <!-- Окно 18+ -->
+  <!-- Окно подтверждения возраста -->
   <div class="age-modal" id="ageModal">
     <div class="age-modal__content">
       <div class="age-modal__symbol">18+</div>
 
-      <p class="eyebrow">PHOENIX / НОЖЕВАЯ МАСТЕРСКАЯ</p>
+      <p class="eyebrow" data-i18n="ageEyebrow">
+        ФЕНИКС / НОЖЕВАЯ МАСТЕРСКАЯ
+      </p>
 
-      <h1>Подтвердите возраст</h1>
+      <h1 data-i18n="ageTitle">
+        Подтвердите возраст
+      </h1>
 
-      <p>
+      <p data-i18n="ageText">
         Сайт содержит информацию о ножевой продукции.
         Продолжая просмотр, вы подтверждаете, что достигли совершеннолетия.
       </p>
 
       <div class="age-modal__buttons">
-        <button class="button button--fire" id="confirmAge">
+        <button
+          class="button button--fire"
+          type="button"
+          id="confirmAge"
+          data-i18n="ageConfirm"
+        >
           Мне есть 18 лет
         </button>
 
-        <button class="button button--ghost" id="declineAge">
+        <button
+          class="button button--ghost"
+          type="button"
+          id="declineAge"
+          data-i18n="ageDecline"
+        >
           Покинуть сайт
         </button>
       </div>
     </div>
   </div>
 
-  <!-- Заставка -->
-  <section class="intro" id="intro">
+  <!-- Стартовая заставка -->
+  <section class="intro" id="intro" aria-hidden="true">
+    <div class="intro__background"></div>
     <div class="intro__glow"></div>
+    <div class="intro__fire-ring"></div>
 
     <div class="intro__logo-wrap">
       <img
         class="intro__logo"
         src="assets/phoenix-logo.jpg"
-        alt="Логотип Phoenix"
+        alt=""
       >
     </div>
 
-    <p class="intro__text">ВОЗРОЖДЁННЫЕ ИЗ ПЕПЛА</p>
+    <div class="intro__ember-cloud">
+      <i></i><i></i><i></i><i></i><i></i>
+      <i></i><i></i><i></i><i></i><i></i>
+      <i></i><i></i><i></i><i></i><i></i>
+      <i></i><i></i><i></i><i></i><i></i>
+    </div>
 
-    <div class="ash ash--intro" aria-hidden="true">
+    <p class="intro__text" data-i18n="introText">
+      ВОЗРОЖДЁННЫЕ ИЗ ПЕПЛА
+    </p>
+
+    <div class="ash ash--intro">
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span>
       <span></span><span></span><span></span><span></span><span></span>
       <span></span><span></span><span></span><span></span><span></span>
       <span></span><span></span><span></span><span></span><span></span>
     </div>
   </section>
 
-  <div class="site">
-    <!-- Шапка -->
-    <header class="header">
-      <a href="#home" class="brand" aria-label="На главную">
-        <span class="brand__mark">
-          <img
-            src="assets/phoenix-logo.jpg"
-            alt="Phoenix"
-            class="brand__logo"
+  <!-- Шапка -->
+  <header class="header">
+    <a class="brand" href="#home" aria-label="Феникс — главная страница">
+      <span class="brand__logo-frame">
+        <img
+          class="brand__logo"
+          src="assets/phoenix-logo.jpg"
+          alt="Феникс"
+        >
+      </span>
+
+      <span class="brand__text">
+        <strong>ФЕНИКС</strong>
+
+        <small data-i18n="brandSubtitle">
+          НОЖЕВАЯ КОМПАНИЯ
+        </small>
+      </span>
+    </a>
+
+    <div class="header__actions">
+      <!-- Переключатель языка -->
+      <div class="language-switcher" id="languageSwitcher">
+        <button
+          class="language-switcher__button"
+          type="button"
+          id="languageButton"
+          aria-label="Выбрать язык"
+          aria-expanded="false"
+          aria-controls="languageDropdown"
+        >
+          <span class="language-switcher__globe">◎</span>
+
+          <span
+            class="language-switcher__current"
+            id="languageCurrent"
           >
-        </span>
+            RU
+          </span>
 
-        <span class="brand__text">
-          <strong>PHOENIX</strong>
-          <small>НОЖЕВАЯ КОМПАНИЯ</small>
-        </span>
-      </a>
+          <span class="language-switcher__arrow">⌄</span>
+        </button>
 
-      <button class="menu-toggle" id="menuToggle" aria-label="Открыть меню">
+        <div
+          class="language-switcher__dropdown"
+          id="languageDropdown"
+        >
+          <p
+            class="language-switcher__caption"
+            data-i18n="languageCaption"
+          >
+            ВЫБЕРИТЕ ЯЗЫК
+          </p>
+
+          <button class="language-option is-active" type="button" data-language="ru">
+            <span class="language-option__code">RU</span>
+            <span class="language-option__name">Русский</span>
+            <span class="language-option__check">✓</span>
+          </button>
+
+          <button class="language-option" type="button" data-language="en">
+            <span class="language-option__code">EN</span>
+            <span class="language-option__name">English</span>
+            <span class="language-option__check">✓</span>
+          </button>
+
+          <button class="language-option" type="button" data-language="de">
+            <span class="language-option__code">DE</span>
+            <span class="language-option__name">Deutsch</span>
+            <span class="language-option__check">✓</span>
+          </button>
+
+          <button class="language-option" type="button" data-language="fr">
+            <span class="language-option__code">FR</span>
+            <span class="language-option__name">Français</span>
+            <span class="language-option__check">✓</span>
+          </button>
+
+          <button class="language-option" type="button" data-language="es">
+            <span class="language-option__code">ES</span>
+            <span class="language-option__name">Español</span>
+            <span class="language-option__check">✓</span>
+          </button>
+
+          <button class="language-option" type="button" data-language="it">
+            <span class="language-option__code">IT</span>
+            <span class="language-option__name">Italiano</span>
+            <span class="language-option__check">✓</span>
+          </button>
+
+          <button class="language-option" type="button" data-language="zh">
+            <span class="language-option__code">ZH</span>
+            <span class="language-option__name">中文</span>
+            <span class="language-option__check">✓</span>
+          </button>
+
+          <button class="language-option" type="button" data-language="ja">
+            <span class="language-option__code">JA</span>
+            <span class="language-option__name">日本語</span>
+            <span class="language-option__check">✓</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Открытие меню -->
+      <button
+        class="menu-toggle"
+        type="button"
+        id="menuToggle"
+        aria-label="Открыть меню"
+        aria-expanded="false"
+        aria-controls="menu"
+      >
         <span></span>
         <span></span>
         <span></span>
       </button>
-
-      <nav class="menu" id="menu">
-        <button class="menu__close" id="menuClose" aria-label="Закрыть меню">
-          ×
-        </button>
-
-        <p class="menu__caption">НАВИГАЦИЯ</p>
-
-        <a href="#" class="menu__link menu-action" data-action="search">
-          Поиск <span>01</span>
-        </a>
-
-        <a href="#" class="menu__link menu-action" data-action="catalog">
-          Каталог <span>02</span>
-        </a>
-
-        <a href="#" class="menu__link menu-action" data-action="favorites">
-          Избранное <span>03</span>
-        </a>
-
-        <a href="#" class="menu__link menu-action" data-action="cart">
-          Корзина <span id="cartCount">0</span>
-        </a>
-
-        <a href="#" class="menu__link menu-action" data-action="support">
-          Поддержка <span>05</span>
-        </a>
-
-        <a href="#contacts" class="menu__link">
-          Контакты <span>06</span>
-        </a>
-
-        <div class="menu__bottom">
-          <p>PHOENIX</p>
-          <span>
-            Скованные огнём.<br>
-            Возрождённые из пепла.
-          </span>
-        </div>
-      </nav>
-    </header>
-
-    <main>
-      <!-- Первый экран -->
-      <section class="hero" id="home">
-        <div class="hero__fire"></div>
-        <div class="hero__grid"></div>
-
-        <div class="hero__content">
-          <p class="eyebrow">НОЖЕВАЯ КОМПАНИЯ / EST. 2025</p>
-
-          <h1>
-            Рождённые в огне.<br>
-            <em>Созданные для вас.</em>
-          </h1>
-
-          <p class="hero__description">
-            Авторские ножи с характером. Клинки, в которых соединились
-            сталь, огонь и индивидуальность владельца.
-          </p>
-
-          <div class="hero__buttons">
-            <a href="#constructor" class="button button--fire">
-              Создать свой нож
-            </a>
-
-            <a href="#showcase" class="button button--ghost">
-              Смотреть коллекцию
-            </a>
-          </div>
-        </div>
-
-        <div class="hero__knife" aria-hidden="true">
-          <div class="hero__knife-glow"></div>
-          <div class="hero__knife-blade"></div>
-          <div class="hero__knife-handle"></div>
-        </div>
-
-        <div class="hero__scroll">
-          <span>ЛИСТАЙТЕ ВНИЗ</span>
-          <i></i>
-        </div>
-      </section>
-
-      <!-- Витрина ножей -->
-      <section class="collection section" id="showcase">
-        <div class="section-heading">
-          <div>
-            <p class="eyebrow">ИЗБРАННАЯ КОЛЛЕКЦИЯ</p>
-
-            <h2>
-              Клинки с<br>
-              <em>историей.</em>
-            </h2>
-          </div>
-
-          <a href="#" class="text-link catalog-link">
-            Весь каталог <span>→</span>
-          </a>
-        </div>
-
-        <div class="knife-grid">
-          <article class="knife-card">
-            <button class="favorite-button" aria-label="Добавить в избранное">
-              ♡
-            </button>
-
-            <div class="knife-card__image">
-              <img src="assets/knife-01.jpg" alt="Нож Пепельный охотник">
-              <span class="knife-card__number">01</span>
-            </div>
-
-            <div class="knife-card__info">
-              <p>ОХОТНИЧЬЯ СЕРИЯ</p>
-              <h3>Пепельный охотник</h3>
-
-              <div>
-                <span>Сталь D2</span>
-
-                <button class="add-cart" data-product="Пепельный охотник">
-                  В корзину +
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <article class="knife-card">
-            <button class="favorite-button" aria-label="Добавить в избранное">
-              ♡
-            </button>
-
-            <div class="knife-card__image">
-              <img src="assets/knife-02.jpg" alt="Нож Крыло феникса">
-              <span class="knife-card__number">02</span>
-            </div>
-
-            <div class="knife-card__info">
-              <p>АВТОРСКАЯ СЕРИЯ</p>
-              <h3>Крыло феникса</h3>
-
-              <div>
-                <span>Сталь M390</span>
-
-                <button class="add-cart" data-product="Крыло феникса">
-                  В корзину +
-                </button>
-              </div>
-            </div>
-          </article>
-
-          <article class="knife-card">
-            <button class="favorite-button" aria-label="Добавить в избранное">
-              ♡
-            </button>
-
-            <div class="knife-card__image">
-              <img src="assets/knife-03.jpg" alt="Нож Чёрное солнце">
-              <span class="knife-card__number">03</span>
-            </div>
-
-            <div class="knife-card__info">
-              <p>ТАКТИЧЕСКАЯ СЕРИЯ</p>
-              <h3>Чёрное солнце</h3>
-
-              <div>
-                <span>Сталь N690</span>
-
-                <button class="add-cart" data-product="Чёрное солнце">
-                  В корзину +
-                </button>
-              </div>
-            </div>
-          </article>
-        </div>
-      </section>
-
-      <!-- Видео-заглушка -->
-      <section class="video-section section">
-        <div class="video-placeholder">
-          <div class="video-placeholder__overlay"></div>
-
-          <div class="video-placeholder__forge">
-            PHOENIX FORGE
-          </div>
-
-          <button class="play-button" id="playVideo" aria-label="Воспроизвести видео">
-            <span>▶</span>
-          </button>
-
-          <div class="video-placeholder__text">
-            <p class="eyebrow">ПРОЦЕСС СОЗДАНИЯ</p>
-
-            <h2>
-              Там, где металл<br>
-              обретает <em>душу.</em>
-            </h2>
-          </div>
-        </div>
-      </section>
-
-      <!-- Конструктор -->
-      <section class="constructor section" id="constructor">
-        <div class="section-heading constructor__heading">
-          <div>
-            <p class="eyebrow">ИНДИВИДУАЛЬНЫЙ ЗАКАЗ</p>
-
-            <h2>
-              Создайте<br>
-              <em>свой феникс.</em>
-            </h2>
-          </div>
-
-          <p class="constructor__description">
-            Выберите каждый элемент будущего клинка:
-            от стали до персональной гравировки.
-          </p>
-        </div>
-
-        <div class="constructor-app">
-          <aside class="constructor-steps">
-            <button class="step is-active" data-step="1">
-              <span>01</span> Сталь
-            </button>
-
-            <button class="step" data-step="2">
-              <span>02</span> Клинок
-            </button>
-
-            <button class="step" data-step="3">
-              <span>03</span> Рукоять
-            </button>
-
-            <button class="step" data-step="4">
-              <span>04</span> Гравировка
-            </button>
-
-            <button class="step" data-step="5">
-              <span>05</span> Ножны
-            </button>
-
-            <button class="step" data-step="6">
-              <span>06</span> Итог
-            </button>
-          </aside>
-
-          <div class="constructor-main">
-            <div class="constructor-preview">
-              <div class="preview-fire"></div>
-
-              <div class="custom-knife">
-                <div class="custom-knife__blade"></div>
-                <div class="custom-knife__guard"></div>
-                <div class="custom-knife__handle"></div>
-                <div class="custom-knife__engraving" id="engravingPreview"></div>
-              </div>
-
-              <p class="constructor-preview__title">
-                PHOENIX / CUSTOM SERIES
-              </p>
-            </div>
-
-            <div class="constructor-controls">
-              <!-- Шаг 1 -->
-              <div class="control-panel is-active" data-panel="1">
-                <p class="eyebrow">ШАГ 01 / ОСНОВА КЛИНКА</p>
-                <h3>Выберите сталь</h3>
-
-                <div class="options-grid">
-                  <button class="option is-selected" data-type="steel" data-value="M390">
-                    <strong>M390</strong>
-                    <span>Премиальная порошковая сталь</span>
-                  </button>
-
-                  <button class="option" data-type="steel" data-value="D2">
-                    <strong>D2</strong>
-                    <span>Высокая износостойкость</span>
-                  </button>
-
-                  <button class="option" data-type="steel" data-value="N690">
-                    <strong>N690</strong>
-                    <span>Коррозионная стойкость</span>
-                  </button>
-
-                  <button class="option" data-type="steel" data-value="Damascus">
-                    <strong>Damascus</strong>
-                    <span>Узорчатая дамасская сталь</span>
-                  </button>
-                </div>
-              </div>
-
-              <!-- Шаг 2 -->
-              <div class="control-panel" data-panel="2">
-                <p class="eyebrow">ШАГ 02 / ХАРАКТЕР КЛИНКА</p>
-                <h3>Выберите форму</h3>
-
-                <div class="options-grid">
-                  <button class="option is-selected" data-type="blade" data-value="Drop Point">
-                    <strong>Drop Point</strong>
-                    <span>Универсальная форма</span>
-                  </button>
-
-                  <button class="option" data-type="blade" data-value="Tanto">
-                    <strong>Tanto</strong>
-                    <span>Выраженная геометрия</span>
-                  </button>
-
-                  <button class="option" data-type="blade" data-value="Clip Point">
-                    <strong>Clip Point</strong>
-                    <span>Точный рез и прокол</span>
-                  </button>
-
-                  <button class="option" data-type="blade" data-value="Bowie">
-                    <strong>Bowie</strong>
-                    <span>Классика с характером</span>
-                  </button>
-                </div>
-              </div>
-
-              <!-- Шаг 3 -->
-              <div class="control-panel" data-panel="3">
-                <p class="eyebrow">ШАГ 03 / ТЕПЛО В ВАШИХ РУКАХ</p>
-                <h3>Выберите рукоять</h3>
-
-                <div class="options-grid">
-                  <button class="option is-selected" data-type="handle" data-value="Чёрный граб">
-                    <strong>Чёрный граб</strong>
-                    <span>Глубокая природная текстура</span>
-                  </button>
-
-                  <button class="option" data-type="handle" data-value="Американский орех">
-                    <strong>Американский орех</strong>
-                    <span>Тёплый благородный оттенок</span>
-                  </button>
-
-                  <button class="option" data-type="handle" data-value="G10">
-                    <strong>G10</strong>
-                    <span>Прочный композитный материал</span>
-                  </button>
-
-                  <button class="option" data-type="handle" data-value="Micarta">
-                    <strong>Micarta</strong>
-                    <span>Фактура и уверенный хват</span>
-                  </button>
-                </div>
-              </div>
-
-              <!-- Шаг 4 -->
-              <div class="control-panel" data-panel="4">
-                <p class="eyebrow">ШАГ 04 / ЛИЧНЫЙ ЗНАК</p>
-                <h3>Добавьте гравировку</h3>
-
-                <label class="engraving-label" for="engravingInput">
-                  Текст или инициалы
-
-                  <input
-                    id="engravingInput"
-                    type="text"
-                    maxlength="20"
-                    placeholder="Например: A. K. / 2025"
-                  >
-                </label>
-
-                <button class="skip-engraving" id="skipEngraving">
-                  Продолжить без гравировки
-                </button>
-              </div>
-
-              <!-- Шаг 5 -->
-              <div class="control-panel" data-panel="5">
-                <p class="eyebrow">ШАГ 05 / ЗАЩИТА КЛИНКА</p>
-                <h3>Выберите ножны</h3>
-
-                <div class="options-grid">
-                  <button class="option is-selected" data-type="sheath" data-value="Натуральная кожа">
-                    <strong>Натуральная кожа</strong>
-                    <span>Классические ножны ручной работы</span>
-                  </button>
-
-                  <button class="option" data-type="sheath" data-value="Kydex">
-                    <strong>Kydex</strong>
-                    <span>Надёжный современный материал</span>
-                  </button>
-
-                  <button class="option" data-type="sheath" data-value="Без ножен">
-                    <strong>Без ножен</strong>
-                    <span>Только клинок и рукоять</span>
-                  </button>
-                </div>
-              </div>
-
-              <!-- Шаг 6 -->
-              <div class="control-panel" data-panel="6">
-                <p class="eyebrow">ВАШ ИНДИВИДУАЛЬНЫЙ КЛИНОК</p>
-                <h3>Феникс создан.</h3>
-
-                <ul class="summary-list">
-                  <li>
-                    <span>Сталь</span>
-                    <strong id="summarySteel">M390</strong>
-                  </li>
-
-                  <li>
-                    <span>Форма клинка</span>
-                    <strong id="summaryBlade">Drop Point</strong>
-                  </li>
-
-                  <li>
-                    <span>Рукоять</span>
-                    <strong id="summaryHandle">Чёрный граб</strong>
-                  </li>
-
-                  <li>
-                    <span>Гравировка</span>
-                    <strong id="summaryEngraving">Не выбрана</strong>
-                  </li>
-
-                  <li>
-                    <span>Ножны</span>
-                    <strong id="summarySheath">Натуральная кожа</strong>
-                  </li>
-                </ul>
-
-                <button class="button button--fire" id="sendRequest">
-                  Оставить заявку на создание
-                </button>
-              </div>
-
-              <div class="constructor-navigation">
-                <button class="nav-button" id="prevStep">
-                  ← Назад
-                </button>
-
-                <span id="stepCounter">01 / 06</span>
-
-                <button class="nav-button" id="nextStep">
-                  Далее →
-                </button>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- Контакты -->
-      <section class="contacts section" id="contacts">
-        <p class="eyebrow">СВЯЗАТЬСЯ С НАМИ</p>
-
-        <h2>
-          Ваш клинок<br>
-          начинается <em>с идеи.</em>
-        </h2>
-
-        <div class="contacts__grid">
-          <a href="tel:+79990000000">+7 (999) 000-00-00</a>
-          <a href="mailto:hello@phoenix-knives.ru">hello@phoenix-knives.ru</a>
-          <a href="#">Telegram</a>
-          <a href="#">VK</a>
-        </div>
-      </section>
-    </main>
+    </div>
+
+    <!-- Главное меню -->
+    <nav class="menu" id="menu" aria-label="Основная навигация">
+      <div class="menu__ember menu__ember--one"></div>
+      <div class="menu__ember menu__ember--two"></div>
+
+      <button
+        class="menu__close"
+        type="button"
+        id="menuClose"
+        aria-label="Закрыть меню"
+      >
+        ×
+      </button>
+
+      <p class="menu__caption" data-i18n="menuCaption">
+        НАВИГАЦИЯ
+      </p>
+
+      <a class="menu__link" href="#search" data-route="search">
+        <span data-i18n="menuSearch">Поиск</span>
+        <small>01</small>
+      </a>
+
+      <a class="menu__link" href="#catalog" data-route="catalog">
+        <span data-i18n="menuCatalog">Каталог</span>
+        <small>02</small>
+      </a>
+
+      <a class="menu__link" href="#favorites" data-route="favorites">
+        <span data-i18n="menuFavorites">Избранное</span>
+        <small id="favoriteCount">0</small>
+      </a>
+
+      <a class="menu__link" href="#cart" data-route="cart">
+        <span data-i18n="menuCart">Корзина</span>
+        <small id="cartCount">0</small>
+      </a>
+
+      <a class="menu__link" href="#contacts" data-route="contacts">
+        <span data-i18n="menuContacts">Контакты</span>
+        <small>05</small>
+      </a>
+
+      <div class="menu__bottom">
+        <p>ФЕНИКС</p>
+
+        <span data-i18n="menuTagline">
+          Скованные огнём.<br>
+          Возрождённые из пепла.
+        </span>
+      </div>
+    </nav>
+  </header>
+
+  <!-- Динамическое содержимое сайта -->
+  <div class="site">
+    <main id="app"></main>
 
     <footer class="footer">
       <div>
-        <strong>PHOENIX</strong>
-        <p>Скованные огнём. Возрождённые из пепла.</p>
+        <strong>ФЕНИКС</strong>
+
+        <p data-i18n="footerTagline">
+          Скованные огнём. Возрождённые из пепла.
+        </p>
       </div>
 
-      <p class="footer__legal">
+      <p data-i18n="footerLegal">
         Демонстрационный сайт. Перед запуском продаж необходимо разместить
         правила продажи, политику обработки персональных данных и информацию
         о соответствии продукции требованиям законодательства.
       </p>
 
-      <span>© 2025 PHOENIX</span>
+      <span>© 2026 ФЕНИКС</span>
     </footer>
-
-    <!-- Пепел -->
-    <div class="ash ash--bottom" aria-hidden="true">
-      <span></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span><span></span>
-      <span></span><span></span><span></span><span></span><span></span>
-    </div>
   </div>
 
-  <div class="toast" id="toast"></div>
+  <!-- Пепел снизу -->
+  <div class="ash ash--bottom" aria-hidden="true">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+  </div>
 
-  <script src="script.js"></script>
+  <!-- Искры -->
+  <div class="embers" aria-hidden="true">
+    <i></i><i></i><i></i><i></i><i></i>
+    <i></i><i></i><i></i><i></i><i></i>
+    <i></i><i></i><i></i><i></i><i></i>
+    <i></i><i></i><i></i><i></i><i></i>
+  </div>
+
+  <!-- Уведомления -->
+  <div
+    class="toast"
+    id="toast"
+    role="status"
+    aria-live="polite"
+  ></div>
+
+  <script src="app.js"></script>
 </body>
 </html>
